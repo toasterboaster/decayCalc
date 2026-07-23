@@ -40,6 +40,7 @@ make a seperate window/menu pop up with selections of the inputs depending on we
     ~~-functionality of a progress bar with both target activity vs target time??~~
     -set all querey selectors in the try.js where building global variables and global functons to make main.js cleaner
     -check to see if setinitalValuesfunction will work when called in calulate function even if all those values arent used?
+    -set function to grab values from inputs for targets and set them as globl variables
     -set progress bar to hit zero when isotope decays away to zero?
         -add second small progress bar that shows until isotope hits zero or background and the time that will happen
         -use time to target as the duration and then can use similar function from progress bar
@@ -67,7 +68,7 @@ make a seperate window/menu pop up with selections of the inputs depending on we
 Some ex - react, flask and astro can be used for the development of front facing apps
 can also use just vanilla javascript, html and css, look into other options for the css end like SASS or CASS,
 SEo and web tool vitals important for respoveniss and the load time of the page. This effects wether it shows up further up on the page or if it shows up on lower pages of a browser search. Sone examples would include google usdes ad
--upload to github
+~~-upload to github~~
 -add a now time and date button. so it puts todays date and time in the inputs
 -add a other button with drop down menu to select other isotopes and add those to db
 -play around with text span centered in the progress bar. Does it move with the bar or stay. Have it overflow the container etc?

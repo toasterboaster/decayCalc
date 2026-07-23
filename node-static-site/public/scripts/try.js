@@ -137,5 +137,15 @@ function setInitialValues() {
     initialDate = initialDateInput.value;
     initialTime = initialTimeInput.value;
     initialActivity = parseFloat(initialActivityInput.value);
+    initialTime = new Date(`${initialDate}T${initialTime}`);
+    initialTimeValue.textContent = initialTime;
+    initialActivityValue.textContent = initialActivityInput.value;
     console.log(`Initial values set: Date: ${initialDate}, Time: ${initialTime}, Activity: ${initialActivity}`);
+}
+//set target values from inputs
+function setTargetValues() {
+    targetDate = targetDateInput.value;
+    targetTime = targetTimeInput.value;
+    targetActivity = parseFloat(targetActivityInput.value);
+    console.log(`Target values set: Date: ${targetDate}, Time: ${targetTime}, Activity: ${targetActivity}`);
 }
