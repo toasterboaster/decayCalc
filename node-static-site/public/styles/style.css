@@ -1,0 +1,238 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+/* Responsive container */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+/* Responsive button grid */
+.isotopeSelector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+}
+
+/* Responsive display bar */
+.progressContainer {
+    width: 100%;
+    max-width: 1200px;
+    height: 6vw;
+    min-height: 32px;
+    max-height: 60px;
+    background: #e0e0e0;
+    margin: 20px auto 10px auto;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: height 0.2s;
+    position: relative;
+}
+
+.progressContainer span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Progress bar */
+.progressBar {
+  height: 100%;
+  width: 0%;
+  background: #4caf50;
+  transition: width 0.2s ease; /* smooth animation */
+  position: relative;
+}
+
+.progressBar span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    color: white;
+    font-weight: bold;
+    pointer-events: none; /* optional: prevents text from blocking clicks */
+}
+
+/*Progress to background bar */
+.progressToBackgroundContainer {
+    width: 100%;
+    max-width: 1200px;
+    height: 3vw;
+    min-height: 32px;
+    max-height: 60px;
+    background: #e0e0e0;
+    margin: 20px auto 10px auto;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: height 0.2s;
+    position: relative;
+}
+
+/* Responsive input and button */
+.activitySelect {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.activitySelect input[type="number"] {
+    flex: 0 1 120px;
+    min-width: 0;
+    padding: 8px;
+    font-size: 1rem;
+}
+
+#setActivityButton {
+    padding: 8px 16px;
+    font-size: 1rem;
+}
+
+/* Isotope button style */
+.isotopeButton {
+    background: hsl(121, 39%, 48%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    width: 100%;
+}
+
+.isotopeButton:hover,
+.isotopeButton:focus {
+    background: #22313a;
+    color: #ffd700;
+    outline: none;
+}
+
+.isotopeButton.selected {
+    background: #22313a;
+    color: #ffd700;
+}
+
+/* Responsive footer */
+footer {
+    background: #35424a;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+    .container {
+        width: 98%;
+        padding: 8px;
+    }
+    .progressContainer {
+        height: 10vw;
+        min-height: 24px;
+    }
+    .isotopeSelector {
+        gap: 8px;
+    }
+    .activitySelect input[type="number"], #activityTimeButton {
+        font-size: 0.95rem;
+        padding: 6px;
+    }
+}
+
+/* hide elements with class 'hidden' */
+.hidden {
+    display: none;
+}
+.inputContainer {
+    margin-top: 16px;
+}
+
+/* Select Calculate type Buttons */
+.calculateTypeButton {
+    background: #4a5a63;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    margin-bottom: 8px;
+    transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+}
+
+.calculateTypeButton:hover,
+.calculateTypeButton:focus {
+    background: #22313a;
+    color: #ffd700;
+    outline: none;
+    box-shadow: 0 4px 12px rgba(34,49,58,0.3);
+}
+.calculateTypeButton:active {
+    transform: translateY(1px);
+}
+
+.calculateTypeButton.selected {
+    background: #22313a;
+    color: #ffd700;
+}   
+
+
+/* Calculate button */
+#calculate {
+    background: #22313a;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#calculate:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.15);
+    outline-offset: 2px;
+}
+#calculate:hover {
+    filter: brightness(1.05);
+}
+
+#calculate.calculated {
+  background-color: #2a7cff;
+  color: white;
+  box-shadow: 0 0 8px rgba(42, 124, 255, 0.6);
+}

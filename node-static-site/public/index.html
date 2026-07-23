@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Static Site</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="/faviconv2.png">
+
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Node Static Site</h1>
+    </header>
+    <main>
+        <div class="container">
+            <div class="progressContainer">
+                    <span id="progressStartText">Enter Activity and Select Isotope</span>
+                <div class="progressBar">
+                    <span id="progressCalcText">In progress…</span>
+                    <span id="targetAchievedSpan">Target Achieved</span>
+                </div>
+            </div>
+            <div class="progressToBackgroundContainer">
+                 <div id="progressToBackgroundBar">
+                    <span id="progessToBackgroundText">Progress to Background</span>
+                </div>
+            </div>
+            <div class="initalValuesContainer">
+                <div id="intialActivity">
+                    <span id="initialActivityText">Initial Activity Value: </span>
+                    <span id="intialAcvtivityValue"></span>
+                </div>
+                <div id="initialTime">
+                    <span id="initialTimeText">Initial Time: </span>
+                    <span id="initialTimeValue"></span>
+                </div>
+                <div id="targetActivity">
+                    <span id="targetActivityText">Target Activity Value: </span>
+                    <span id="targetActivityValue"></span>
+                </div>
+                <div id="targetTime">
+                    <span id="targetTimeText">Target Time: </span>
+                    <span id="targetTimeValue"></span>
+                </div>
+            </div>
+            <div class="isotopeSelectorContainer">
+                <div class="isotopeSelector">
+                    <button class="isotopeButton" data-filter="*">Tc99m</button>
+                    <button class="isotopeButton" data-filter=".category1">I131</button>
+                    <button class="isotopeButton" data-filter=".category2">Cs137</button>
+                    <button class="isotopeButton" data-filter=".category2">F18</button>
+                    <button class="isotopeButton" data-filter=".category2">Ga68</button>
+                    <button class="isotopeButton" data-filter=".category2">I123</button>
+                    <button class="isotopeButton" data-filter=".category2">Cu64</button>
+                    <button class="isotopeButton" data-filter=".category2">Lu177</button>
+                    <button class="isotopeButton" data-filter=".category2">N13</button>
+
+                </div>
+            </div>
+            <div class="selectCalculateTypeContainer">
+                <button id="calculateTargetActivity" class="calculateTypeButton">Find the Target Activity</button>
+                <button id="calculateTargetTime" class="calculateTypeButton">Find the Target Time</button>
+            </div>
+            <div id="inputContainer" class="inputContainer">
+                <div id="initialActivitySelect" class="activitySelect">
+                    <span>Set Initial Activity:</span>
+                    <input type="number" id="initialActivityInput" placeholder="Enter Activity in mCi">
+                </div>
+                <div id="initialTimeSelect" class="timeSelect">
+                    <span>Set Initial Time:</span>
+                    <input type="date" id="initialDateInput">
+                    <input type="time" id="initialTimeInput" step="60">
+                    <input type="datetime-local" id="targetDateTimeInput">
+
+                    <button id="nowBtn" class="nowBtn">Now</button>
+                </div>
+                <div id="targetActivitySelect" class="targetActivitySelect">
+                    <span>Set Target Activity:</span>
+                    <input type="number" id="targetActivityInput" placeholder="Enter Target Activity in mCi">
+                </div>
+                <div id="targetTimeSelect" class="targetTimeSelect">
+                    <span>Set Target Time:</span>
+                    <input type="date" id="targetDateInput">
+                    <input type="time" id="targetTimeInput" step="60">
+                    <button id="nowBtn2" class="nowBtn">Now</button>
+                </div>
+            </div>
+            <button id="reset">Reset</button>
+            <div id="calculateButton">
+                <button id="calculate">Calculate</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Node Static Site</p>
+    </footer>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
