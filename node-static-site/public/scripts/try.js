@@ -14,6 +14,7 @@ let progressTimer = null;
 let startTime = null;
 let mode = null;
 let progress = 0;
+let timeDiffMinutes = null;
 
 //Query Selectors for all buttons and inputs
     //buttons
@@ -86,6 +87,7 @@ function solveForTime(N0, N, lambda) {
     throw new Error("Invalid input values for time calculation")
     alert("Invalid input values for time calculation. Please ensure that lambda and N0 are greater than 0." );
   }
+  //uses a small positive number to avoid log(0) error when N is 0 or negative
   if (N <= 0) {
     N = Math.max(N, 1e-10);
   }
@@ -132,20 +134,147 @@ document.querySelectorAll('.isotopeButton').forEach(button => {
     });
 });
 
-//sets initial time and activity from inputs
+//sets initial time and activity from inputs as global variables and displays them in the selected spans
 function setInitialValues() {
     initialDate = initialDateInput.value;
     initialTime = initialTimeInput.value;
     initialActivity = parseFloat(initialActivityInput.value);
     initialTime = new Date(`${initialDate}T${initialTime}`);
     initialTimeValue.textContent = initialTime;
-    initialActivityValue.textContent = initialActivityInput.value;
+    initialActivityValue.textContent = initialActivity;
     console.log(`Initial values set: Date: ${initialDate}, Time: ${initialTime}, Activity: ${initialActivity}`);
 }
-//set target values from inputs
+//set target values from inputs as global variables and displays them in the selected spans
 function setTargetValues() {
     targetDate = targetDateInput.value;
     targetTime = targetTimeInput.value;
+    targetDateTime = new Date(`${targetDate}T${targetTime}`);
+    timeDiffMinutes = (targetDateTime - initialTime) / 60000;
+    targetTimeValue.textContent = targetDateTime;
     targetActivity = parseFloat(targetActivityInput.value);
     console.log(`Target values set: Date: ${targetDate}, Time: ${targetTime}, Activity: ${targetActivity}`);
 }
+
+//SET MODE TO CALCULATE TARGET ACTIVITY OR CALCULATE TARGET TIME
+  //calculate the target activity at a given time selected; then make target activity input hidden 
+    // and initial time, initial activity, and target time input visible 
+calculateTargetActivityButton.addEventListener('click', () => {
+  hideAllInputs();
+  initialActivitySelect.classList.toggle('hidden');
+  initialTimeSelect.classList.toggle('hidden');
+  targetTimeSelect.classList.toggle('hidden');
+  setActiveButton(calculateTargetActivityButton, '.calculateTypeButton');
+  mode = 'calculateTargetActivity';
+  targetActivityValue.textContent = 'Calculating...';
+});
+  
+//calculate the target time for a given activity selected; then make target time input hidden 
+  //and initial time, initial activity, and target activity input visible
+calculateTargetTimeButton.addEventListener('click', () => {
+  hideAllInputs();
+  initialActivitySelect.classList.toggle('hidden');
+  initialTimeSelect.classList.toggle('hidden');
+  targetActivitySelect.classList.toggle('hidden');
+  setActiveButton(calculateTargetTimeButton, '.calculateTypeButton');
+  mode = 'calculateTargetTime';
+  targetTimeValue.textContent = 'Calculating...';
+});
+
+//Progress bar and timer function
+function render(percent) {
+  progressBar.style.width = percent + "%";
+};
+
+function startProgressBar() {
+  const start = initialTime.getTime();
+  const end = (mode === 'calculateTargetActivity')
+    ? targetDateTime.getTime()
+    : newTime.getTime();
+
+  progressTimer = setInterval(() => {
+    const now = Date.now();
+    const percent = ((now - start) / (end - start)) * 100;
+
+  render(percent);
+
+  if (percent >= 100) {
+    clearInterval(progressTimer);
+    setProgressState('done');
+  }
+}, 50);
+}
+
+//CALCULATE FUNCTION
+function calculate() {
+  calculateButton.classList.add('calculated');
+  //clear progress bar and timer if already running
+  progressBar.style.width = "0%";
+  if (progressTimer) {
+    clearInterval(progressTimer);
+  }
+  //Clear text span when calculate is running and show calculate in progress
+  setProgressState('calc');
+
+  //set all inputs from global variables times, activites, isotopes selected, modes etc.
+  setInitialValues();
+  setTargetValues();
+
+  //decay equation variables
+  let N0 = initialActivity;
+  let lambda = decayConstantsMinutes[isotopeSelected];
+  let N = targetActivity;
+  console.log(`Calculating with N0: ${N0}, lambda: ${lambda}, N: ${N}, mode: ${mode}`);
+
+  //simple error handling for missing inputs and invalid values will need to add more later and specify
+  if (!N0 || !lambda) {
+    alert(`Missing initial activity or isotope. N0: ${N0}, lambda: ${lambda}, isotopeSelected: ${isotopeSelected}`);
+    return;
+  }
+
+  //calculate target activity
+  if (mode === 'calculateTargetActivity') {
+    targetActivityInput.value = '';
+    targetActivity = decayExponential(N0, lambda, timeDiffMinutes);
+    targetActivityValue.textContent = targetActivity.toFixed(6);
+  }
+  //calculate target time
+  else if (mode === 'calculateTargetTime') {
+    let timeNeeded = solveForTime(N0, N, lambda);
+      newTime = new Date(initialTime.getTime() + timeNeeded * 60000);
+      targetTimeValue.textContent = newTime
+  }
+  
+  startProgressBar();
+
+  return;
+
+}
+
+//Reset function to clear all inputs, outputs, and progress bar
+function resetAllInputs() {
+  initialDateInput.value = '';
+  initialTimeInput.value = '';
+  initialActivityInput.value = '';
+  targetActivityInput.value = '';
+  targetDateInput.value = '';
+  targetTimeInput.value = '';
+
+  // Also clear displayed results
+  initialTimeValue.textContent = '';
+  initialActivityValue.textContent = '';
+  targetActivityValue.textContent = '';
+  targetTimeValue.textContent = '';
+
+  setActiveButton(null, '.isotopeButton');
+  setActiveButton(null, '.calculateTypeButton');
+  isotopeSelected = null;
+
+  //And reset progress bar
+  progressBar.style.width = "0%";
+  clearInterval(progressTimer);
+  setProgressState('start');
+}
+
+//Event Listeners for buttons
+calculateButton.addEventListener('click', calculate);
+resetButton.addEventListener('click', resetAllInputs);

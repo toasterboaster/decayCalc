@@ -38,7 +38,8 @@ make a seperate window/menu pop up with selections of the inputs depending on we
     ~~-have text in progressBar that dissapears when calculate is selected~~
     ~~-when progress bar reaches 100 have text in span change to "reached target activity"~~
     ~~-functionality of a progress bar with both target activity vs target time??~~
-    -set all querey selectors in the try.js where building global variables and global functons to make main.js cleaner
+    ~~-set all querey selectors in the try.js where building global variables and global functons to make main.js cleaner~~
+    -troubleshoot try.js as it wont work because of null values i think...
     -check to see if setinitalValuesfunction will work when called in calulate function even if all those values arent used?
     -set function to grab values from inputs for targets and set them as globl variables
     -set progress bar to hit zero when isotope decays away to zero?
@@ -76,3 +77,4 @@ SEo and web tool vitals important for respoveniss and the load time of the page.
 -make progress bar functoin a global function and add variables that are needed to moved outside the calculate function if possible. Some variables are only stored from when the calculate button is pushed tho...
 -change date time as seperate into one input which is an html input type called datetime-local
 - add another page to use another path on the backend using the server papge.
+-play with disabling inputs from that are needed for certain calculate modes
