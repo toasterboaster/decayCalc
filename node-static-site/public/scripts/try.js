@@ -23,6 +23,8 @@ let calculateButton = document.getElementById('calculate');
 let calculateTargetActivityButton = document.getElementById('calculateTargetActivity');
 let calculateTargetTimeButton = document.getElementById('calculateTargetTime');
 let resetButton = document.getElementById('resetButton');
+let nowButtonInitial = document.getElementById('nowButtonInitial');
+let nowButtonTarget = document.getElementById('nowButtonTarget');
     //inputs
 let initialDateInput = document.getElementById('initialDateInput');
 let initialTimeInput = document.getElementById('initialTimeInput');
@@ -136,13 +138,13 @@ document.querySelectorAll('.isotopeButton').forEach(button => {
 
 //sets initial time and activity from inputs as global variables and displays them in the selected spans
 function setInitialValues() {
-    initialDate = initialDateInput.value;
-    initialTime = initialTimeInput.value;
-    initialActivity = parseFloat(initialActivityInput.value);
-    initialTime = new Date(`${initialDate}T${initialTime}`);
-    initialTimeValue.textContent = initialTime;
-    initialActivityValue.textContent = initialActivity;
-    console.log(`Initial values set: Date: ${initialDate}, Time: ${initialTime}, Activity: ${initialActivity}`);
+  initialDate = initialDateInput.value;
+  initialTime = initialTimeInput.value;
+  initialActivity = parseFloat(initialActivityInput.value);
+  initialTime = new Date(`${initialDate}T${initialTime}`);
+  initialTimeValue.textContent = initialTime;
+  initialActivityValue.innerHTML = initialActivity;
+  console.log(`Initial values set: Date: ${initialDate}, Time: ${initialTime},  initial Activity: ${initialActivity}`);
 }
 //set target values from inputs as global variables and displays them in the selected spans
 function setTargetValues() {
@@ -152,7 +154,21 @@ function setTargetValues() {
     timeDiffMinutes = (targetDateTime - initialTime) / 60000;
     targetTimeValue.textContent = targetDateTime;
     targetActivity = parseFloat(targetActivityInput.value);
+    targetActivityValue.textContent = targetActivity;
     console.log(`Target values set: Date: ${targetDate}, Time: ${targetTime}, Activity: ${targetActivity}`);
+}
+
+//now button functionality to set current date and time in the input fields
+function setNow(input) {
+  const d = new Date();
+
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  const hours = String(d.getHours()).padStart(2, '0');
+  const minutes = String(d.getMinutes()).padStart(2, '0');
+
+  input.value = `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 
 //SET MODE TO CALCULATE TARGET ACTIVITY OR CALCULATE TARGET TIME
@@ -278,3 +294,9 @@ function resetAllInputs() {
 //Event Listeners for buttons
 calculateButton.addEventListener('click', calculate);
 resetButton.addEventListener('click', resetAllInputs);
+nowButtonInitial.addEventListener('click', () => {
+  setNow(localDateTimeInput);
+});
+nowButtonTarget.addEventListener('click', () => {
+  setNow(targetTimeInput);
+});

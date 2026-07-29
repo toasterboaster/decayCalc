@@ -39,9 +39,11 @@ make a seperate window/menu pop up with selections of the inputs depending on we
     ~~-when progress bar reaches 100 have text in span change to "reached target activity"~~
     ~~-functionality of a progress bar with both target activity vs target time??~~
     ~~-set all querey selectors in the try.js where building global variables and global functons to make main.js cleaner~~
-    -troubleshoot try.js as it wont work because of null values i think...
-    -check to see if setinitalValuesfunction will work when called in calulate function even if all those values arent used?
-    -set function to grab values from inputs for targets and set them as globl variables
+    ~~-troubleshoot try.js as it wont work because of null values i think...~~
+    ~~-check to see if setinitalValuesfunction will work when called in calulate function even if all those values arent used?~~
+    ~~-set function to grab values from inputs for targets and set them as globl variables~~
+    -set now button functionality for current time date set up 
+    -plan to use local datetime as a seperate ux
     -set progress bar to hit zero when isotope decays away to zero?
         -add second small progress bar that shows until isotope hits zero or background and the time that will happen
         -use time to target as the duration and then can use similar function from progress bar

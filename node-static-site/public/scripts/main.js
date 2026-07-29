@@ -1,7 +1,7 @@
 //Get Query Selectors and set them
 let initialActivityInput = document.querySelector('#initialActivityInput');
 let progressStartText = document.querySelector('#progressStartText');
-let initialActivityValue = document.querySelector('#intialAcvtivityValue');
+let initialActivityValue = document.querySelector('#initialActivityValue');
 let initialTimeValue = document.querySelector('#initialTimeValue');
 let targetActivityValue = document.querySelector('#targetActivityValue');
 let targetActivityInput = document.querySelector('#targetActivityInput');
