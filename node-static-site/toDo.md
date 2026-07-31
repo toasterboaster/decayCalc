@@ -42,7 +42,7 @@ make a seperate window/menu pop up with selections of the inputs depending on we
     ~~-troubleshoot try.js as it wont work because of null values i think...~~
     ~~-check to see if setinitalValuesfunction will work when called in calulate function even if all those values arent used?~~
     ~~-set function to grab values from inputs for targets and set them as globl variables~~
-    -set now button functionality for current time date set up 
+    ~~-set now button functionality for current time date set up~~
     -plan to use local datetime as a seperate ux
     -set progress bar to hit zero when isotope decays away to zero?
         -add second small progress bar that shows until isotope hits zero or background and the time that will happen
@@ -50,6 +50,7 @@ make a seperate window/menu pop up with selections of the inputs depending on we
             -use solveForTime equation that gives you time needed to hit zero, whichever is chosen for zero. which will give the const end variable from the progress bar function. which is used in the percent variable to show the progress. The progressBar function itself could probably be rewritten to be outside the Calculate function and just used inside of it.
                 -write this function as a global function and call it inside the calculate function. Then eventually could implement it with the progress bar function as well.
                 -set global variables, intitalTime, isotopeSelected, initialActivity, targetAcvitivity, targetTime, calculation mode, etc. That way when calculate function is pressed it will lock those variables into place. When now button is pressed the global values are locked in and show that current time. Then the calculate function can pull those global variables.
+        -have text in timeToBackgroundProgressBar switch to saying time to background and it has a countdown
 -have the alert show if target activity isnt selected or add it to current alert--- as in have the alert tell you axactly what is missing.
 -set the alert to show what variable or input is 
 -cant use zero as target activity. fix this.
@@ -80,3 +81,6 @@ SEo and web tool vitals important for respoveniss and the load time of the page.
 -change date time as seperate into one input which is an html input type called datetime-local
 - add another page to use another path on the backend using the server papge.
 -play with disabling inputs from that are needed for certain calculate modes
+-is current date and time format for the inputs only set for Central time?
+-Remove top banner saying welcome to node static site
+-set current isotope span and value to appear in the current values div in the top display contianer

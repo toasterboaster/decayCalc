@@ -28,6 +28,18 @@ h1 {
     padding: 16px;
 }
 
+.valueDisplayAndCurrentValuesContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.valueDisplayContainer,
+.currentValueContainer {
+    flex: 1;
+}
+
+
 /* Responsive button grid */
 .isotopeSelector {
     display: grid;

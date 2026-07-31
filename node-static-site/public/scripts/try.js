@@ -159,7 +159,7 @@ function setTargetValues() {
 }
 
 //now button functionality to set current date and time in the input fields
-function setNow(input) {
+function setNow(dateInput, timeInput) {
   const d = new Date();
 
   const year = d.getFullYear();
@@ -167,8 +167,9 @@ function setNow(input) {
   const day = String(d.getDate()).padStart(2, '0');
   const hours = String(d.getHours()).padStart(2, '0');
   const minutes = String(d.getMinutes()).padStart(2, '0');
-
-  input.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+  dateInput.value = `${year}-${month}-${day}`;
+  timeInput.value = `${hours}:${minutes}`;
+  //input.value = `${year}-${month}-${day}T${hours}:${minutes}`; can be used for the local-datetime input
 }
 
 //SET MODE TO CALCULATE TARGET ACTIVITY OR CALCULATE TARGET TIME
@@ -295,8 +296,8 @@ function resetAllInputs() {
 calculateButton.addEventListener('click', calculate);
 resetButton.addEventListener('click', resetAllInputs);
 nowButtonInitial.addEventListener('click', () => {
-  setNow(localDateTimeInput);
+  setNow(initialDateInput, initialTimeInput);
 });
 nowButtonTarget.addEventListener('click', () => {
-  setNow(targetTimeInput);
+  setNow(targetDateInput, targetTimeInput);
 });
