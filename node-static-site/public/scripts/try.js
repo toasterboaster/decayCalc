@@ -15,6 +15,8 @@ let startTime = null;
 let mode = null;
 let progress = 0;
 let timeDiffMinutes = null;
+let currentActivity = null;
+let activityInterval = null;
 
 //Query Selectors for all buttons and inputs
     //buttons
@@ -43,11 +45,15 @@ let initialTimeValue = document.getElementById('initialTimeValue');
 let initialActivityValue = document.getElementById('initialActivityValue');
 let targetTimeValue = document.getElementById('targetTimeValue');
 let targetActivityValue = document.getElementById('targetActivityValue');
+let currentActivityValue = document.getElementById('currentActivityValue');
+let currentTimeValue = document.getElementById('currentTimeValue');
     //Progress bar and progress text spans
 let progressBar = document.querySelector('.progressBar');
 let progressStartText = document.getElementById('progressStartText');
 let progressCalcText = document.getElementById('progressCalcText');
 let targetAchievedSpan = document.getElementById('targetAchievedSpan');
+    //progressToBackgroundBar
+let progressToBackgroundBar = document.querySelector('.progressToBackgroundBar');
 
 //Set active state functions
     //set active button for calculation type selection
@@ -198,10 +204,16 @@ calculateTargetTimeButton.addEventListener('click', () => {
 });
 
 //Progress bar and timer function
+/*
 function render(percent) {
   progressBar.style.width = percent + "%";
 };
+*/
+function render(percent, progressBarElement) {
+  progressBarElement.style.width = percent + "%";
+}
 
+/*
 function startProgressBar() {
   const start = initialTime.getTime();
   const end = (mode === 'calculateTargetActivity')
@@ -220,6 +232,41 @@ function startProgressBar() {
   }
 }, 50);
 }
+*/
+
+
+function startProgressBar(start, end, renderPositionAt100) {
+  progressTimer = setInterval(() => {
+    const now = Date.now();
+    const percent = ((now - start) / (end - start)) * 100;  
+    
+  if (renderPositionAt100 == true) {
+  render(percent, progressBar);
+  }
+  if (renderPositionAt100 == false) {
+    render(100 - percent, progressToBackgroundBar);
+  }
+  
+  if (percent >= 100) {
+    clearInterval(progressTimer);
+    setProgressState('done');
+  }
+}, 50);
+}
+
+
+//Current activity function, this function can be called in the calculate function along with a set interval to update the current activity value in real time as the progress bar runs. It calculates the current activity based on the initial activity, decay constant, and elapsed time since the initial time.
+function setCurrentActivity() {
+ let N0 = initialActivity;
+ let current = Date.now();
+ let t = (current - initialTime.getTime()) / 60000; // time in minutes
+ let lambda = decayConstantsMinutes[isotopeSelected];
+ currentActivity = decayExponential(N0, lambda, t);
+ currentActivityValue.textContent = currentActivity.toFixed(6);
+ currentTimeValue.textContent = new Date(current).toLocaleString();
+ console.log(`Current activity: ${currentActivity.toFixed(6)} current time: ${current.toLocaleString}`);
+}
+
 
 //CALCULATE FUNCTION
 function calculate() {
@@ -260,11 +307,19 @@ function calculate() {
       newTime = new Date(initialTime.getTime() + timeNeeded * 60000);
       targetTimeValue.textContent = newTime
   }
+  //start the progress bar and timer
+  //startProgressBar();
+  startProgressBar(initialTime.getTime(), (mode === 'calculateTargetActivity') ? targetDateTime.getTime() : newTime.getTime(), true);
+  startProgressBar(0, solveForTime(N0, 0, lambda) * 60000, false);
   
-  startProgressBar();
+  //set an interval to update the current activity value in real time as the progress bar runs
+  setCurrentActivity();
+  if (activityInterval) {
+    clearInterval(activityInterval);
+  }
+  activityInterval = setInterval(setCurrentActivity, 1000);
 
   return;
-
 }
 
 //Reset function to clear all inputs, outputs, and progress bar
@@ -290,6 +345,12 @@ function resetAllInputs() {
   progressBar.style.width = "0%";
   clearInterval(progressTimer);
   setProgressState('start');
+
+  //reset current activity and time values
+  clearInterval(activityInterval);
+  activityInterval = null;
+  currentActivityValue.textContent = '';
+  currentTimeValue.textContent = '';
 }
 
 //Event Listeners for buttons

@@ -107,6 +107,14 @@ h1 {
     position: relative;
 }
 
+.progressToBackgroundBar {
+  height: 100%;
+  width: 100%;
+  background: #2a7cff;
+  transition: width 0.2s ease; /* smooth animation */
+  position: relative;
+}
+
 /* Responsive input and button */
 .activitySelect {
     display: flex;

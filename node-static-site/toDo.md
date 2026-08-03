@@ -43,6 +43,10 @@ make a seperate window/menu pop up with selections of the inputs depending on we
     ~~-check to see if setinitalValuesfunction will work when called in calulate function even if all those values arent used?~~
     ~~-set function to grab values from inputs for targets and set them as globl variables~~
     ~~-set now button functionality for current time date set up~~
+    ~~-set the current activity set so its a functoin that can be called every 5 seconds using set interval and then it updates the span with its new value.~~
+    -make the progressBar function into a generic function set all the variables into it as parameters, that way i can reuse that function for the progressToBackgroundBarS
+    -progressToBackgroundBar currently not functioning maybe because of css rendering?
+    -make the live activity display be optional with a button as i fear it requires a lot of time and computage from the javascript having to update so much, slows down website
     -plan to use local datetime as a seperate ux
     -set progress bar to hit zero when isotope decays away to zero?
         -add second small progress bar that shows until isotope hits zero or background and the time that will happen
@@ -84,3 +88,4 @@ SEo and web tool vitals important for respoveniss and the load time of the page.
 -is current date and time format for the inputs only set for Central time?
 -Remove top banner saying welcome to node static site
 -set current isotope span and value to appear in the current values div in the top display contianer
+-change the current value displays or live displays to be better designed. Larger current activity maybe centered with the smaller time underneath
