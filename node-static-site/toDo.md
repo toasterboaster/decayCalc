@@ -44,8 +44,10 @@ make a seperate window/menu pop up with selections of the inputs depending on we
     ~~-set function to grab values from inputs for targets and set them as globl variables~~
     ~~-set now button functionality for current time date set up~~
     ~~-set the current activity set so its a functoin that can be called every 5 seconds using set interval and then it updates the span with its new value.~~
-    -make the progressBar function into a generic function set all the variables into it as parameters, that way i can reuse that function for the progressToBackgroundBarS
-    -progressToBackgroundBar currently not functioning maybe because of css rendering?
+    ~~-make the progressBar function into a generic function set all the variables into it as parameters, that way i can reuse that function for the progressToBackgroundBarS~~
+    ~~-progressToBackgroundBar currently not functioning maybe because of css rendering?~~
+    -progressToBackgroundBar doesnt hit zero on the css animation when the target hits background. I cahnged the functin call to have zero be 0.5 in the calculate function for now.
+    -need seperate progressState for the different types of progressBar? As there are multiple timers running that dont stop if calculate button is pressed before old timer has finished.
     -make the live activity display be optional with a button as i fear it requires a lot of time and computage from the javascript having to update so much, slows down website
     -plan to use local datetime as a seperate ux
     -set progress bar to hit zero when isotope decays away to zero?
@@ -89,3 +91,4 @@ SEo and web tool vitals important for respoveniss and the load time of the page.
 -Remove top banner saying welcome to node static site
 -set current isotope span and value to appear in the current values div in the top display contianer
 -change the current value displays or live displays to be better designed. Larger current activity maybe centered with the smaller time underneath
+-make ui so user can enter in their own value for background activity or zero

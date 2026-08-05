@@ -243,14 +243,18 @@ function startProgressBar(start, end, renderPositionAt100) {
   if (renderPositionAt100 == true) {
   render(percent, progressBar);
   }
+  
   if (renderPositionAt100 == false) {
+    console.log(percent);
     render(100 - percent, progressToBackgroundBar);
+    
   }
   
   if (percent >= 100) {
     clearInterval(progressTimer);
     setProgressState('done');
   }
+  console.log(start, end, renderPositionAt100, percent);
 }, 50);
 }
 
@@ -273,6 +277,7 @@ function calculate() {
   calculateButton.classList.add('calculated');
   //clear progress bar and timer if already running
   progressBar.style.width = "0%";
+  progressToBackgroundBar.style.width = "100%";
   if (progressTimer) {
     clearInterval(progressTimer);
   }
@@ -310,7 +315,7 @@ function calculate() {
   //start the progress bar and timer
   //startProgressBar();
   startProgressBar(initialTime.getTime(), (mode === 'calculateTargetActivity') ? targetDateTime.getTime() : newTime.getTime(), true);
-  startProgressBar(0, solveForTime(N0, 0, lambda) * 60000, false);
+  startProgressBar(Date.now(), Date.now() + solveForTime(N0, 0.5, lambda) * 60000, false);
   
   //set an interval to update the current activity value in real time as the progress bar runs
   setCurrentActivity();
@@ -343,6 +348,7 @@ function resetAllInputs() {
 
   //And reset progress bar
   progressBar.style.width = "0%";
+  progressToBackgroundBar.style.width = "0%";
   clearInterval(progressTimer);
   setProgressState('start');
 
